@@ -1,2 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trivium Polytechnic - Digital Academy</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- React and Babel CDNs -->
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.20.15/babel.min.js"></script>
+</head>
+<body class="bg-parchment-50 font-serif">
+  <div id="root"></div>
+  <script type="text/babel">
+    // Header Component with Glow Effect
+    function Header() {
+      return (
+        <nav className="bg-navy-800 text-white p-4 sticky top-0 shadow-lg">
+          <div className="container mx-auto flex justify-between items-center">
+            <a href="#home">
+              <span className="text-2xl font-bold text-gold-200 animate-pulse">Trivium Poly</span>
+            </a>
+            <ul className="flex space-x-6">
+              <li><a href="#home" className="hover:text-gold-300 transition">Home</a></li>
+              <li><a href="#mission" className="hover:text-gold-300 transition">Mission</a></li>
+              <li><a href="#courses" className="hover:text-gold-300 transition">Courses</a></li>
+              <li><a href="#register" className="hover:text-gold-300 transition">Register</a></li>
+              <li><a href="#dashboard" className="hover:text-gold-300 transition">Dashboard</a></li>
+              <li><a href="#contact" className="hover:text-gold-300 transition">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+      );
+    }
 
-<html><body><h1>My New Site</h1><p>Welcome!</p><p>Updated text</p></body></html>
+    // Hero Section with Typewriter Animation
+    function Hero() {
+      const [text, setText] = React.useState('');
+      React.useEffect(() => {
+        const fullText = "Where Wisdom Sparks Innovation";
+        let index = 0;
+        const interval = setInterval(() => {
+          setText(fullText.slice(0, index));
+          index++;
+          if (index > fullText.length) clearInterval(interval);
+        }, 150);
+        return () => clearInterval(interval);
+      }, []);
+      return (
+        <section id="home" className="bg-gradient-to-r from-navy-800 to-parchment-100 py-24 text-center">
+          <div className="container mx-auto">
+            <h1 className="text-5xl font-bold text-white mb-4">Trivium Polytechnic</h1>
+            <p className="text-2xl text-gold-200 animate-typewriter">{text}</p>
+            <a href="#courses" className="mt-6 inline-block bg-gold-200 text-navy-800 px-8 py-3 rounded-full hover:bg-gold-300 transition">
+              Discover Courses
+            </a>
+          </div>
+        </section>
+      );
+    }
+
+    // Mission Section with Subtle Animation
+    function Mission() {
+      return (
+        <section id="mission" className="py-16 bg-parchment-50">
+          <div className="container mx-auto text-center animate-fade-in">
+            <h2 className="text-4xl font-bold mb-6 text-navy-800">Our Mission</h2>
+            <p className="text-lg mx-auto max-w-lg text-gray-700">
+              We blend classical roots with cutting-edge tech, guiding students to explore truth and create with confidence.
+            </p>
+          </div>
+        </section>
+      );
+    }
+
+    // Courses Section with Carousel
+    function Courses() {
+      const courses = [
+        { code: "PHI 201", title: "Philosophy of Wonder", desc: "Dive into truth with Socratic debates.", grades: "All Ages" },
+        { code: "COD 130", title: "Code & Logic", desc: "Master Python through puzzles.", grades: "All Ages" },
+        { code: "ENG 150", title: "Robotics Lab", desc: "Build and program robots.", grades: "All Ages" },
+      ];
+      return (
+        <section id="courses" className="py-16 bg-navy-800 text-white">
+          <div className="container mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-8 text-gold-200">Explore Our Courses</h2>
+            <div className="overflow-x-auto whitespace-nowrap pb-4">
+              {courses.map((course, index) => (
+                <div key={index} className="inline-block w-72 bg-parchment-50 text-navy-800 p-6 m-4 rounded-lg shadow-lg hover:shadow-xl transition">
+                  <h3 className="text-xl font-semibold">{course.code}: {course.title}</h3>
+                  <p className="text-sm">{course.desc}</p>
+                  <p className="text-xs mt-2">For: {course.grades}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // Dashboard Teaser with Canvas
+    function Dashboard() {
+      return (
+        <section id="dashboard" className="py-16 bg-parchment-50">
+          <div className="container mx-auto text-center">
+            <h2 className="text-4xl font-bold mb-6 text-navy-800">Dashboard Preview</h2>
+            <p className="text-lg mb-6 text-gray-700">Track your journey live!</p>
+            <div className="w-64 h-64 mx-auto bg-navy-800 rounded-lg flex items-center justify-center">
+              <canvas id="dashboardCanvas" className="w-full h-full"></canvas>
+            </div>
+            <script>
+              const canvas = document.getElementById('dashboardCanvas');
+              const ctx = canvas.getContext('2d');
+              ctx.fillStyle = 'gold';
+              ctx.fillRect(50, 50, 100, 100);
+            </script>
+          </div>
+        </section>
+      );
+    }
+
+    // Contact Section with Glow
+    function Contact() {
+      return (
+        <section id="contact" className="py-16 bg-navy-800 text-white">
+          <div className="container mx-auto text-center">
+            <h2 className="text-4xl font-bold mb-6 text-gold-200">Connect With Us</h2>
+            <div className="max-w-md mx-auto">
+              <input type="text" placeholder="Name" className="w-full p-3 mb-4 border rounded-lg bg-parchment-50 text-navy-800" disabled />
+              <input type="email" placeholder="Email" className="w-full p-3 mb-4 border rounded-lg bg-parchment-50 text-navy-800" disabled />
+              <textarea placeholder="Message" className="w-full p-3 mb-4 border rounded-lg bg-parchment-50 text-navy-800" rows="4" disabled></textarea>
+              <button className="bg-gold-200 text-navy-800 px-6 py-3 rounded-lg hover:bg-gold-300 transition">Send</button>
+            </div>
+            <p className="mt-6 text-gold-200">Email: info@triviumpolytechnic.org | Phone: (605) 555-1234</p>
+          </div>
+        </section>
+      );
+    }
+
+    // Footer with Animation
+    function Footer() {
+      return (
+        <footer className="bg-navy-800 text-white py-6 animate-pulse-slow">
+          <div className="container mx-auto text-center">
+            <p>© 2025 Trivium Polytechnic. All Rights Reserved.</p>
+            <p className="mt-2 text-gold-200">Ignite Your Future</p>
+          </div>
+        </footer>
+      );
+    }
+
+    // Main App Component
+    function App() {
+      return (
+        <div>
+          <Header />
+          <Hero />
+          <Mission />
+          <Courses />
+          <Dashboard />
+          <Contact />
+          <Footer />
+        </div>
+      );
+    }
+
+    // Render the App
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+  <style>
+    /* Custom Tailwind color classes */
+    .bg-navy-800 { background-color: #1A2A44; }
+    .bg-navy-900 { background-color: #121d33; }
+    .bg-parchment-50 { background-color: #FBF9F3; }
+    .bg-parchment-100 { background-color: #F8F5EB; }
+    .text-gold-200 { color: #D4A017; }
+    .text-gold-300 { color: #E8B923; }
+    .bg-gold-200 { background-color: #D4A017; }
+    .bg-gold-300 { background-color: #E8B923; }
+    .animate-typewriter {
+      overflow: hidden;
+      border-right: .15em solid #D4A017;
+      white-space: nowrap;
+      animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #D4A017; }
+    }
+    .animate-fade-in {
+      animation: fadeIn 1s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .animate-pulse-slow {
+      animation: pulse 3s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+  </style>
+</body>
+</html>
